@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeloraAI - AI Chatbot for Smarter Learning</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Rendering libraries (Markdown, safe HTML, code colours, maths).
+         If you are offline Velora still works and shows plain text. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="app">
+
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <div class="logo">✦</div>
+                <span>VeloraAI</span>
+                <button class="close-sidebar" onclick="toggleSidebar()" aria-label="Close menu">×</button>
+            </div>
+
+            <button class="new-chat" onclick="newChat()">＋ New Chat</button>
+
+            <p class="side-label">YOUR CONVERSATIONS</p>
+            <div id="history" class="history"></div>
+
+            <div class="sidebar-bottom">
+                <div class="profile-avatar">V</div>
+                <div>
+                    <strong>Velora Assistant</strong>
+                    <small id="sideStatus">Connecting…</small>
+                </div>
+                <span class="online-dot" id="onlineDot"></span>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <button class="menu-button" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+                <div class="model-name">
+                    <span class="status-dot" id="statusDot"></span>
+                    VeloraAI <span class="model-tag" id="modelTag">ASSISTANT</span>
+                </div>
+                <div class="top-actions">
+                    <button class="clear-button" onclick="exportChat()">Export</button>
+                    <button class="clear-button" onclick="clearChat()">Clear chat</button>
+                </div>
+            </header>
+
+            <div class="banner" id="banner" hidden></div>
+
+            <section class="chat-area" id="chatArea">
+                <div class="welcome" id="welcome">
+                    <div class="welcome-icon">✦</div>
+                    <p class="eyebrow">YOUR AI STUDY COMPANION</p>
+                    <h1>Learn anything.<br><span>Let's understand it together.</span></h1>
+                    <p class="welcome-description">
+                        Velora remembers your conversation, searches the live web, reads pages,
+                        does exact maths and writes code.
+                    </p>
+
+                    <div class="suggestions">
+                        <button onclick="usePrompt('What are the top news headlines today? Give me a short summary with sources.')">
+                            <span>◉</span>
+                            <strong>Latest news &amp; live info</strong>
+                            <small>Searches the web for up-to-date answers</small>
+                        </button>
+                        <button onclick="usePrompt('If I invest 5000 a month at 8% yearly return, how much will I have after 15 years? Show the working.')">
+                            <span>∑</span>
+                            <strong>Solve maths &amp; numbers</strong>
+                            <small>Exact calculations, step by step</small>
+                        </button>
+                        <button onclick="usePrompt('Explain runtime polymorphism in C++ with a simple example, line by line')">
+                            <span>〈/〉</span>
+                            <strong>Write &amp; explain code</strong>
+                            <small>Highlighted, copyable code blocks</small>
+                        </button>
+                        <button onclick="usePrompt('Explain how black holes work, as if I am 15. Then give me a 5-question quiz.')">
+                            <span>◈</span>
+                            <strong>Learn any topic</strong>
+                            <small>Simple explanations, then test yourself</small>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="messages" id="messages"></div>
+            </section>
+
+            <footer class="composer-area">
+                <div class="composer">
+                    <textarea id="messageInput"
+                        placeholder="Message VeloraAI…"
+                        rows="1"
+                        aria-label="Write your message"></textarea>
+                    <button id="micButton" class="mic-button" onclick="toggleMic()"
+                        aria-label="Speak your message" title="Speak" hidden>🎤</button>
+                    <button id="sendButton" class="send-button"
+                        onclick="onSendClick()" aria-label="Send message">↑</button>
+                </div>
+                <div class="composer-note">
+                    <span>✦ Powered by AI · live web search</span>
+                    <span>Always verify important information.</span>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <div class="toast" id="toast"></div>
+</body>
+</html>

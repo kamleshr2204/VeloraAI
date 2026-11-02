@@ -1,0 +1,20 @@
+backend/velora
+backend/velora.exe
+tests/velora_tests
+tests/velora_tests.exe
+build/
+
+# Private credentials
+.env
+.env.*
+!.env.example
+
+# Build files
+**/build/
+*.o
+*.obj
+*.dll
+
+# System files
+.DS_Store
+Thumbs.db
