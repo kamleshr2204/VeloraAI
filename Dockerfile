@@ -21,4 +21,5 @@ RUN cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
 
 EXPOSE 10000
 
-CMD ["sh", "-c", "VELORA_HOST=0.0.0.0 VELORA_PORT=${PORT:-10000} ./build/velora"]
+CMD ["sh", "-c", "VELORA_HOST=0.0.0.0 VELORA_PORT=${PORT:-10000} ./backend/velora"]
+ 
