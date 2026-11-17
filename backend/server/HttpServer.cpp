@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <memory>
+#include <cstdlib>
 
 using json = nlohmann::json;
 
@@ -15,13 +16,19 @@ HttpServer::HttpServer(const Config& config, const Agent& agent) : config_(confi
 }
 
 bool HttpServer::originAllowed(const std::string& origin) {
-    if (origin.empty() || origin == "null") return true;  // same-origin request / file://
+    if (origin.empty() || origin == "null") return true;
+
+    const char* allowed = std::getenv("VELORA_ALLOWED_ORIGIN");
+
+    if (allowed && origin == allowed) return true;
+
     for (const char* ok : {"http://localhost", "http://127.0.0.1"}) {
         std::string prefix = ok;
         if (origin.compare(0, prefix.size(), prefix) == 0 &&
             (origin.size() == prefix.size() || origin[prefix.size()] == ':'))
             return true;
     }
+
     return false;
 }
 
