@@ -50,7 +50,7 @@ Config Config::fromEnvironment() {
 }
 
 bool Config::isOpenAI() const {
-    return baseUrl_.find("api.openai.com") != std::string::npos;
+    return !apiKey_.empty();
 }
 
 std::string Config::searchProviderName() const {
