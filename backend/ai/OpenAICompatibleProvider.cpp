@@ -71,7 +71,7 @@ Completion OpenAICompatibleProvider::complete(const json& messages, const json& 
         return true;
     };
 
-    httplib::Client client(baseUrl_);
+    httplib::SSLClient client(baseUrl_.substr(8));
     client.set_connection_timeout(10, 0);
     client.set_read_timeout(120, 0);
     client.set_write_timeout(30, 0);
